@@ -1,0 +1,15 @@
+<Project>
+  <Import Project="version.props" />
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Authors>virtual</Authors>
+    <Product>AmazonKS3</Product>
+    <PackageProjectUrl>https://github.com/cocosip/AmazonKS3</PackageProjectUrl>
+    <PackageLicense>https://github.com/cocosip/AmazonKS3/blob/master/LICENSE</PackageLicense>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/cocosip/AmazonKS3</RepositoryUrl>
+	<Description>使用Amazon原生SDK调用金山云KS3</Description>
+    <PackageTags>Amazon,AWSSDK,KS3,S3</PackageTags>
+  </PropertyGroup>
+
+</Project>

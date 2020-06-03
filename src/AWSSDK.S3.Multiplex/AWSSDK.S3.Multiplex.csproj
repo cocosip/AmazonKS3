@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\build\common.props" />
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>AWSSDK.S3.Multiplex</AssemblyName>
+    <PackageId>AWSSDK.S3.Multiplex</PackageId>
+    <RootNamespace>Amazon.S3</RootNamespace>
+    <Description>AWSSDK.S3 SDK 客户端重用(多路复用)</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.S3" Version="3.3.111.5" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.4" />
+  </ItemGroup>
+
+</Project>
