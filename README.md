@@ -10,10 +10,10 @@
 
 | Build Server | Platform | Build Status |
 | ------------ | -------- | ------------ |
-| Azure Pipelines| Windows |[![Build Status](https://dev.azure.com/cocosip/AmazonKS3/_apis/build/status/cocosip.AmazonKS3?branchName=master&jobName=Windows)](https://dev.azure.com/cocosip/AmazonKS3/_build/latest?definitionId=13&branchName=master)|
-| Azure Pipelines| Linux |[![Build Status](https://dev.azure.com/cocosip/AmazonKS3/_apis/build/status/cocosip.AmazonKS3?branchName=master&jobName=Linux)](https://dev.azure.com/cocosip/AmazonKS3/_build/latest?definitionId=13&branchName=master)
+| Azure Pipelines| Windows |[![Build Status](https://dev.azure.com/cocosip/AmazonKS3/_apis/build/status/cocosip.AmazonKS3?branchName=master&jobName=Windows)](https://dev.azure.com/cocosip/AmazonKS3/_build/latest?definitionId=21&branchName=master)|
+| Azure Pipelines| Linux |[![Build Status](https://dev.azure.com/cocosip/AmazonKS3/_apis/build/status/cocosip.AmazonKS3?branchName=master&jobName=Linux)](https://dev.azure.com/cocosip/AmazonKS3/_build/latest?definitionId=21&branchName=master)
 
 | Package  | Version | Downloads|
 | -------- | ------- | -------- |
 | `AmazonKS3` | [![NuGet](https://img.shields.io/nuget/v/AmazonKS3.svg)](https://www.nuget.org/packages/AmazonKS3) |![NuGet](https://img.shields.io/nuget/dt/AmazonKS3.svg)|
-| `AmazonS3.ClientFactory` | [![NuGet](https://img.shields.io/nuget/v/AmazonS3.ClientFactory.svg)](https://www.nuget.org/packages/AmazonS3.ClientFactory) |![NuGet](https://img.shields.io/nuget/dt/AmazonS3.ClientFactory.svg)|
+| `AWSSDK.S3.Multiplex` | [![NuGet](https://img.shields.io/nuget/v/AWSSDK.S3.Multiplex.svg)](https://www.nuget.org/packages/AWSSDK.S3.Multiplex) |![NuGet](https://img.shields.io/nuget/dt/AWSSDK.S3.Multiplex.svg)|
