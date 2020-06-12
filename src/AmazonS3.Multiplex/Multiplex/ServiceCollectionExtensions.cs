@@ -16,7 +16,10 @@ namespace Amazon.S3.Multiplex
                 configure = o => { };
             }
 
-            services.Configure<MultiplexOption>(configure)
+            services
+                .Configure<MultiplexOption>(configure)
+                .AddTransient<IS3ClientBuilder, AmazonS3ClientBuilder>()
+                .AddSingleton<IS3ClientBuilderFactory, S3ClientBuilderFactory>()
                 .AddSingleton<IS3ClientFactory, S3ClientFactory>()
                 .AddSingleton<IS3ClientPoolBuilder, S3ClientPoolBuilder>()
                 .AddScoped<IS3ClientPool, S3ClientPool>()

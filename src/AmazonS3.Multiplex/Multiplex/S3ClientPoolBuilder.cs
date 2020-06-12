@@ -26,10 +26,11 @@ namespace Amazon.S3.Multiplex
             {
                 var injectDescriptor = scope.ServiceProvider.GetService<S3ClientDescriptor>();
 
+                injectDescriptor.VendorType = descriptor.VendorType;
                 injectDescriptor.AccessKeyId = descriptor.AccessKeyId;
                 injectDescriptor.SecretAccessKey = descriptor.SecretAccessKey;
+                injectDescriptor.Config = descriptor.Config;
                 injectDescriptor.ClientCount = descriptor.ClientCount;
-                injectDescriptor.ClientBuilder = descriptor.ClientBuilder;
 
                 _logger.LogInformation("新建客户端连接池,AK:'{0}',SK:'{1}'.", descriptor.AccessKeyId, descriptor.SecretAccessKey);
 

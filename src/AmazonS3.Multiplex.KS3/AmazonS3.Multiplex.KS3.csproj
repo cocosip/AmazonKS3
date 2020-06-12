@@ -3,16 +3,14 @@
   <Import Project="..\..\build\common.props" />
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>AWSSDK.S3.Multiplex</AssemblyName>
-    <PackageId>AmazonS3.Multiplex</PackageId>
+    <AssemblyName>AmazonS3.Multiplex.KS3</AssemblyName>
+    <PackageId>AmazonS3.Multiplex.KS3</PackageId>
     <RootNamespace>Amazon.S3</RootNamespace>
     <Description>AWSSDK.S3 SDK 客户端重用(多路复用)</Description>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="AWSSDK.S3" Version="3.3.111.11" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.5" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.5" />
+    <ProjectReference Include="..\AmazonKS3\AmazonKS3.csproj" />
+    <ProjectReference Include="..\AmazonS3.Multiplex\AmazonS3.Multiplex.csproj" />
   </ItemGroup>
 
 </Project>

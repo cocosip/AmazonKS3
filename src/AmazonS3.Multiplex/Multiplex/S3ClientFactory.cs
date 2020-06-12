@@ -11,7 +11,7 @@ namespace Amazon.S3.Multiplex
     public class S3ClientFactory : IS3ClientFactory
     {
         private bool _isInitialized = false;
-        private readonly SemaphoreSlim _semaphoreSlim;
+        private readonly object syncObject = new object();
         private readonly ConcurrentDictionary<string, IS3ClientPool> _poolDict;
 
         private readonly ILogger _logger;
@@ -23,7 +23,6 @@ namespace Amazon.S3.Multiplex
             _logger = logger;
             _option = options.Value;
             _s3ClientPoolBuilder = s3ClientPoolBuilder;
-            _semaphoreSlim = new SemaphoreSlim(1);
             _poolDict = new ConcurrentDictionary<string, IS3ClientPool>();
         }
 
@@ -71,25 +70,25 @@ namespace Amazon.S3.Multiplex
             var hash = Util.GetIdentifierHash(accessKeyId, secretAccessKey);
             if (!_poolDict.TryGetValue(hash, out IS3ClientPool clientPool))
             {
-                _semaphoreSlim.Wait(5000);
-                try
+                lock (syncObject)
                 {
                     if (!_poolDict.TryGetValue(hash, out clientPool))
                     {
                         var descriptor = factory.Invoke();
                         clientPool = _s3ClientPoolBuilder.BuildS3ClientPool(descriptor);
-                        clientPool.Initialize();
                         if (!_poolDict.TryAdd(clientPool.Identifier, clientPool))
                         {
                             _logger.LogWarning("'GetOrAddClient'添加新建的客户端连接池'{0}'失败!", clientPool.Identifier);
                         }
                     }
                 }
-                finally
-                {
-                    _semaphoreSlim.Release();
-                }
             }
+
+            if (clientPool == null)
+            {
+                throw new ArgumentException($"无法获取客户端连接池,AK:'{accessKeyId}',SK:'{secretAccessKey}'");
+            }
+
             return clientPool.GetClient();
         }
 
@@ -110,24 +109,23 @@ namespace Amazon.S3.Multiplex
         public void Register(S3ClientDescriptor descriptor)
         {
             var hash = Util.GetIdentifierHash(descriptor.AccessKeyId, descriptor.SecretAccessKey);
+
             if (!_poolDict.ContainsKey(hash))
             {
-                _semaphoreSlim.Wait(5000);
-                try
+                lock (syncObject)
                 {
-                    if (!_poolDict.TryGetValue(hash, out IS3ClientPool clientPool))
+                    if (!_poolDict.ContainsKey(hash))
                     {
-                        clientPool = _s3ClientPoolBuilder.BuildS3ClientPool(descriptor);
-                        clientPool.Initialize();
+                        var clientPool = _s3ClientPoolBuilder.BuildS3ClientPool(descriptor);
                         if (!_poolDict.TryAdd(clientPool.Identifier, clientPool))
                         {
-                            _logger.LogWarning("添加新建的客户端连接池'{0}'失败!", clientPool.Identifier);
+                            _logger.LogWarning("'GetOrAddClient'注册新建的客户端连接池'{0}'失败!", clientPool.Identifier);
+                        }
+                        else
+                        {
+                            _logger.LogDebug("注册新的客户端连接池:'{0}'成功!", clientPool.Identifier);
                         }
                     }
-                }
-                finally
-                {
-                    _semaphoreSlim.Release();
                 }
             }
         }

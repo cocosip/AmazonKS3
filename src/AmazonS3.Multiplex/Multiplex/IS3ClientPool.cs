@@ -14,7 +14,7 @@
 
         /// <summary>初始化
         /// </summary>
-        void Initialize();
+        //void Initialize();
 
         /// <summary>获取客户端
         /// </summary>
