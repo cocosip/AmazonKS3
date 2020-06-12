@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Concurrent;
-using System.Threading;
 
 namespace Amazon.S3.Multiplex
 {

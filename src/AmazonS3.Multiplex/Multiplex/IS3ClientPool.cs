@@ -12,10 +12,6 @@
         /// </summary>
         S3ClientDescriptor Descriptor { get; }
 
-        /// <summary>初始化
-        /// </summary>
-        //void Initialize();
-
         /// <summary>获取客户端
         /// </summary>
         IAmazonS3 GetClient();

@@ -39,8 +39,8 @@ namespace AmazonS3.Multiplex.Sample
 
 
             _sampleAppService = _provider.GetService<SampleAppService>();
-            Run();
-            //ClientBuilderTest();
+            //Run();
+            ClientBuilderTest();
             Console.ReadLine();
         }
 

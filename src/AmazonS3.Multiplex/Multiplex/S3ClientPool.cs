@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
-using System.Security.Cryptography;
 using System.Threading;
 
 namespace Amazon.S3.Multiplex
@@ -36,23 +35,6 @@ namespace Amazon.S3.Multiplex
             Identifier = Util.GetIdentifierHash(descriptor.AccessKeyId, descriptor.SecretAccessKey);
             _clientDict = new ConcurrentDictionary<int, IAmazonS3>();
         }
-
-        /// <summary>初始化
-        /// </summary>
-        //public void Initialize()
-        //{
-        //    for (int i = 0; i < _clientCount; i++)
-        //    {
-        //        var builder = _s3ClientBuilderFactory.GetClientBuilder(Descriptor.VendorType);
-        //        var client = builder.BuildClient(Descriptor);
-
-        //        if (!_clientDict.TryAdd(i, client))
-        //        {
-        //            _logger.LogWarning("添加客户端'{0}'失败,AK:'{1}',SK:'{2}'.", i, Descriptor.AccessKeyId, Descriptor.SecretAccessKey);
-        //        }
-        //    }
-        //}
-
 
         /// <summary>获取客户端
         /// </summary>
