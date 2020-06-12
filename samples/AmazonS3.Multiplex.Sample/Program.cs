@@ -1,13 +1,6 @@
-﻿using Amazon.S3;
-using Amazon.S3.Multiplex;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System;
 
-
-namespace AWSSDK.S3.Multiplex.Sample
+namespace AmazonS3.Multiplex.Sample
 {
     class Program
     {
