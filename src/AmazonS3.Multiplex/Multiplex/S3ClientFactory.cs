@@ -82,12 +82,6 @@ namespace Amazon.S3.Multiplex
                     }
                 }
             }
-
-            if (clientPool == null)
-            {
-                throw new ArgumentException($"无法获取客户端连接池,AK:'{accessKeyId}',SK:'{secretAccessKey}'");
-            }
-
             return clientPool.GetClient();
         }
 
@@ -108,7 +102,6 @@ namespace Amazon.S3.Multiplex
         public void Register(S3ClientDescriptor descriptor)
         {
             var hash = Util.GetIdentifierHash(descriptor.AccessKeyId, descriptor.SecretAccessKey);
-
             if (!_poolDict.ContainsKey(hash))
             {
                 lock (syncObject)
