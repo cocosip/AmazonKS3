@@ -13,16 +13,5 @@ namespace AmazonKS3
             SignatureVersion = "2";
         }
 
-
-        public static AmazonKS3Config GetDefault()
-        {
-            var config = new AmazonKS3Config()
-            {
-                ServiceURL = "http://ks3-cn-beijing.ksyun.com",
-                ForcePathStyle = true
-            };
-            return config;
-        }
-
     }
 }
