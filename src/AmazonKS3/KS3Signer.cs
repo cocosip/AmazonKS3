@@ -32,7 +32,7 @@ namespace AmazonKS3
             var resourcePath = GetResourcePath(request);
             //待签名字符串
             var canonicalString = RestUtil.MakeKS3CanonicalString(request.HttpMethod, resourcePath, request, null);
-            Trace.WriteLine($"待签名数据:{canonicalString}");
+
             var hmacBytes = HmacUtil.GetHmacSha1(canonicalString, awsSecretAccessKey);
             //签名
             var signature = Convert.ToBase64String(hmacBytes);
@@ -48,7 +48,6 @@ namespace AmazonKS3
                 request.Headers.Remove(Headers.AUTHORIZATION);
             }
             request.Headers.Add("Authorization", "KSS " + awsAccessKeyId + ":" + signature);
-            Trace.WriteLine($"当前认证签名:{signature}", signature);
         }
 
 
@@ -59,9 +58,9 @@ namespace AmazonKS3
             //上传文件数据
             if (request.ContentStream != null && !request.Headers.ContainsKey(Headers.CONTENT_MD5))
             {
-                if (request.ContentStream is MD5Stream)
+                if (request.ContentStream is MD5Stream stream1)
                 {
-                    var stream = ((MD5Stream)request.ContentStream).GetNonWrapperBaseStream();
+                    var stream = stream1.GetNonWrapperBaseStream();
                     var md5Buffer = Md5Util.GetMd5Buffer(stream);
                     if (stream.CanSeek)
                     {

@@ -132,7 +132,7 @@ namespace AmazonKS3.Utils
         {
             //return resourcePath.StartsWith("/") && resourcePath.Length > 1 && resourcePath.LastIndexOf("/") == 0;
             //  /xxxx/
-            var pattern = @"^/([A-Za-z0-9_\-\.]){4,64}$";
+            var pattern = @"^/([A-Za-z0-9_\-\.]){4,256}$";
             return Regex.IsMatch(resourcePath, pattern);
         }
 
