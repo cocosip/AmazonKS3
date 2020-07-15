@@ -10,7 +10,7 @@ namespace Amazon.S3.Multiplex
     public class S3ClientFactory : IS3ClientFactory
     {
         private bool _isInitialized = false;
-        private readonly object syncObject = new object();
+        private readonly object SyncObject = new object();
         private readonly ConcurrentDictionary<string, IS3ClientPool> _poolDict;
 
         private readonly ILogger _logger;
@@ -69,7 +69,7 @@ namespace Amazon.S3.Multiplex
             var hash = Util.GetIdentifierHash(accessKeyId, secretAccessKey);
             if (!_poolDict.TryGetValue(hash, out IS3ClientPool clientPool))
             {
-                lock (syncObject)
+                lock (SyncObject)
                 {
                     if (!_poolDict.TryGetValue(hash, out clientPool))
                     {
@@ -104,7 +104,7 @@ namespace Amazon.S3.Multiplex
             var hash = Util.GetIdentifierHash(descriptor.AccessKeyId, descriptor.SecretAccessKey);
             if (!_poolDict.ContainsKey(hash))
             {
-                lock (syncObject)
+                lock (SyncObject)
                 {
                     if (!_poolDict.ContainsKey(hash))
                     {
