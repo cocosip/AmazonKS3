@@ -10,6 +10,10 @@
 
         /// <summary>KS3存储
         /// </summary>
-        KS3 = 2
+        KS3 = 2,
+
+        /// <summary>其他类型存储
+        /// </summary>
+        Other = 4
     }
 }
