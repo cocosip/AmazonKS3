@@ -28,7 +28,7 @@ namespace AmazonKS3.Sample
                 _client = new AmazonKS3Client(_option.AccessKeyId, _option.SecretAccessKey, new AmazonKS3Config()
                 {
                     ServiceURL = _option.ServerUrl,
-                    ForcePathStyle = true,
+                    ForcePathStyle = false,
                     SignatureVersion = "2.0"
                 });
             }
