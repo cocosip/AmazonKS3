@@ -39,8 +39,8 @@ namespace AmazonS3.Multiplex.Sample
 
 
             _sampleAppService = _provider.GetService<SampleAppService>();
-            //Run();
-            ClientBuilderTest();
+            Run();
+            //ClientBuilderTest();
             Console.ReadLine();
         }
 
@@ -49,31 +49,31 @@ namespace AmazonS3.Multiplex.Sample
 
         public static async void Run()
         {
-            //列出Bucket
-            await _sampleAppService.ListBucketsAsync();
+            ////列出Bucket
+            //await _sampleAppService.ListBucketsAsync();
 
-            //列出对象
-            await _sampleAppService.ListObjectsAsync();
+            ////列出对象
+            //await _sampleAppService.ListObjectsAsync();
 
-            // 获取Bucket权限
-            await _sampleAppService.GetAclAsync();
+            //// 获取Bucket权限
+            //await _sampleAppService.GetAclAsync();
 
-            //简单上传
-            var simpleUploadKey = await _sampleAppService.SimpleUploadAsync();
+            ////简单上传
+            //var simpleUploadKey = await _sampleAppService.SimpleUploadAsync();
 
-            //下载文件
-            await _sampleAppService.SimpleGetObjectAsync(simpleUploadKey);
+            ////下载文件
+            //await _sampleAppService.SimpleGetObjectAsync(simpleUploadKey);
 
             //获取预授权地址
-            var url1 = _sampleAppService.GetPreSignedURL(simpleUploadKey);
+            var url1 = _sampleAppService.GetPreSignedURL("100001/100001001/20191203/5de6040ec3b3175954a29581.dcm");
             //生成预授权地址
-            var url2 = _sampleAppService.GeneratePreSignedURL(simpleUploadKey);
+            var url2 = _sampleAppService.GeneratePreSignedURL("100001/100001001/20191203/5de6040ec3b3175954a29581.dcm");
 
-            //拷贝文件key
-            var copyKey = await _sampleAppService.CopyObjectAsync(simpleUploadKey);
+            ////拷贝文件key
+            //var copyKey = await _sampleAppService.CopyObjectAsync(simpleUploadKey);
 
-            //下载Copy
-            await _sampleAppService.SimpleGetObjectAsync(copyKey);
+            ////下载Copy
+            //await _sampleAppService.SimpleGetObjectAsync(copyKey);
 
             ////删除文件
             //await DeleteObject(simpleUploadKey);
