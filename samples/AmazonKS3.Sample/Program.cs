@@ -47,7 +47,7 @@ namespace AmazonKS3.Sample
 
 
 
-        public static async void Run()
+        public static void Run()
         {
             ////列出Bucket
             //await _sampleAppService.ListBucketsAsync();
