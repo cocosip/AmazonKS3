@@ -16,5 +16,3 @@
 | Package  | Version | Downloads|
 | -------- | ------- | -------- |
 | `AmazonKS3` | [![NuGet](https://img.shields.io/nuget/v/AmazonKS3.svg)](https://www.nuget.org/packages/AmazonKS3) |![NuGet](https://img.shields.io/nuget/dt/AmazonKS3.svg)|
-| `AmazonS3.Multiplex` | [![NuGet](https://img.shields.io/nuget/v/AmazonS3.Multiplex.svg)](https://www.nuget.org/packages/AmazonS3.Multiplex) |![NuGet](https://img.shields.io/nuget/dt/AmazonS3.Multiplex.svg)|
-| `AmazonS3.Multiplex.KS3` | [![NuGet](https://img.shields.io/nuget/v/AmazonS3.Multiplex.KS3.svg)](https://www.nuget.org/packages/AmazonS3.Multiplex.KS3) |![NuGet](https://img.shields.io/nuget/dt/AmazonS3.Multiplex.KS3.svg)|
