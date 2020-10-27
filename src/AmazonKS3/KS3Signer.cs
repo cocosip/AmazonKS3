@@ -5,7 +5,6 @@ using Amazon.Runtime.Internal.Util;
 using AmazonKS3.Utils;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
 
@@ -78,15 +77,15 @@ namespace AmazonKS3
             }
         }
 
-        /// <summary>是否需要移除Md5
-        /// </summary>
-        private void RemoveContentMd5(IRequest request)
-        {
-            if (request.Headers.ContainsKey(Headers.CONTENT_MD5) && request.ContentStream == null)
-            {
-                request.Headers.Remove(Headers.CONTENT_MD5);
-            }
-        }
+        ///// <summary>是否需要移除Md5
+        ///// </summary>
+        //private void RemoveContentMd5(IRequest request)
+        //{
+        //    if (request.Headers.ContainsKey(Headers.CONTENT_MD5) && request.ContentStream == null)
+        //    {
+        //        request.Headers.Remove(Headers.CONTENT_MD5);
+        //    }
+        //}
 
         /// <summary>获取ResourcePath
         /// </summary>
