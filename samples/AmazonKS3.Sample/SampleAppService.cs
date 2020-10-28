@@ -26,8 +26,8 @@ namespace AmazonKS3.Sample
                 _client = new AmazonKS3Client(_options.AccessKeyId, _options.SecretAccessKey, new AmazonKS3Config()
                 {
                     ServiceURL = _options.ServerUrl,
-                    ForcePathStyle = false,
-                    SignatureVersion = "2.0"
+                    ForcePathStyle = true,
+                    SignatureVersion = "v2"
                 });
             }
             return _client;
@@ -128,7 +128,8 @@ namespace AmazonKS3.Sample
         /// </summary>
         public async Task<string> SimpleUploadAsync()
         {
-            var key = $"{Guid.NewGuid()}.dcm";
+            var ext = _options.SimpleUploadFilePath.Substring(_options.SimpleUploadFilePath.LastIndexOf('.'));
+            var key = $"{Guid.NewGuid()}{ext}";
             Console.WriteLine("---上传简单文件,上传Key:{0}---", key);
 
             var putObjectRequest = new PutObjectRequest()
@@ -201,7 +202,8 @@ namespace AmazonKS3.Sample
         /// </summary>
         public async Task<string> CopyObjectAsync(string key)
         {
-            var destinationKey = $"copyfiles/{Guid.NewGuid()}.dcm";
+            var ext = key.Substring(key.LastIndexOf('.'));
+            var destinationKey = $"copyfiles/{Guid.NewGuid()}{ext}";
             Console.WriteLine("---拷贝文件,目标:{0}---", destinationKey);
             var copyObjectResponse = await GetClient().CopyObjectAsync(new CopyObjectRequest()
             {

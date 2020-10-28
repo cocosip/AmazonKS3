@@ -2,12 +2,8 @@
 {
     public class SampleAppOptions
     {
-        /// <summary>AK
-        /// </summary>
         public string AccessKeyId { get; set; }
     
-        /// <summary>SK
-        /// </summary>
         public string SecretAccessKey { get; set; }
     
         public string ServerUrl { get; set; }
