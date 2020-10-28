@@ -203,8 +203,15 @@ namespace AmazonKS3.Sample
         public async Task<string> CopyObjectAsync(string key)
         {
             var ext = key.Substring(key.LastIndexOf('.'));
-            var destinationKey = $"copyfiles/{Guid.NewGuid()}{ext}";
+            var destinationKey = $"{Guid.NewGuid()}{ext}";
             Console.WriteLine("---拷贝文件,目标:{0}---", destinationKey);
+
+            //var o = await GetClient().GetObjectAsync(new GetObjectRequest()
+            //{
+            //    BucketName = _options.DefaultBucket,
+            //    Key = key
+            //});
+
             var copyObjectResponse = await GetClient().CopyObjectAsync(new CopyObjectRequest()
             {
                 SourceBucket = _options.DefaultBucket,

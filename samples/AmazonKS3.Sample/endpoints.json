@@ -7,7 +7,7 @@
         "signatureVersions": [ "v2" ]
       },
       "dnsSuffix": "amazonaws.com",
-      "partition": "aws",
+      "partition": "ks3",
       "partitionName": "AWS Standard",
       "regionRegex": "^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$",
       "regions": {
