@@ -4,7 +4,7 @@
       "defaults": {
         "hostname": "{service}.{region}.{dnsSuffix}",
         "protocols": [ "https" ],
-        "signatureVersions": [ "v4" ]
+        "signatureVersions": [ "v2" ]
       },
       "dnsSuffix": "amazonaws.com",
       "partition": "aws",

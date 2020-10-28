@@ -4,8 +4,6 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AmazonKS3.Sample
@@ -14,10 +12,10 @@ namespace AmazonKS3.Sample
     {
         private IAmazonS3 _client = null;
 
-        private readonly SampleAppOption _option;
-        public SampleAppService(IOptions<SampleAppOption> options)
+        private readonly SampleAppOptions _options;
+        public SampleAppService(IOptions<SampleAppOptions> options)
         {
-            _option = options.Value;
+            _options = options.Value;
         }
 
 
@@ -25,9 +23,9 @@ namespace AmazonKS3.Sample
         {
             if (_client == null)
             {
-                _client = new AmazonKS3Client(_option.AccessKeyId, _option.SecretAccessKey, new AmazonKS3Config()
+                _client = new AmazonKS3Client(_options.AccessKeyId, _options.SecretAccessKey, new AmazonKS3Config()
                 {
-                    ServiceURL = _option.ServerUrl,
+                    ServiceURL = _options.ServerUrl,
                     ForcePathStyle = false,
                     SignatureVersion = "2.0"
                 });
@@ -56,7 +54,7 @@ namespace AmazonKS3.Sample
 
             var getACLResponse = await GetClient().GetACLAsync(new GetACLRequest()
             {
-                BucketName = _option.DefaultBucket
+                BucketName = _options.DefaultBucket
             });
 
             foreach (var grant in getACLResponse.AccessControlList.Grants)
@@ -75,7 +73,7 @@ namespace AmazonKS3.Sample
 
             var listObjectsV2Response = await GetClient().ListObjectsV2Async(new ListObjectsV2Request()
             {
-                BucketName = _option.DefaultBucket,
+                BucketName = _options.DefaultBucket,
                 Prefix = prefix,
                 Delimiter = delimiter,
                 MaxKeys = count
@@ -96,7 +94,7 @@ namespace AmazonKS3.Sample
 
             var listObjectsResponse = await GetClient().ListObjectsAsync(new ListObjectsRequest()
             {
-                BucketName = _option.DefaultBucket,
+                BucketName = _options.DefaultBucket,
                 //Prefix = prefix,
                 //Delimiter = delimiter,
                 MaxKeys = count
@@ -119,7 +117,7 @@ namespace AmazonKS3.Sample
 
             var getObjectResponse = await GetClient().GetObjectAsync(new GetObjectRequest()
             {
-                BucketName = _option.DefaultBucket,
+                BucketName = _options.DefaultBucket,
                 Key = key,
             });
 
@@ -135,10 +133,10 @@ namespace AmazonKS3.Sample
 
             var putObjectRequest = new PutObjectRequest()
             {
-                BucketName = _option.DefaultBucket,
+                BucketName = _options.DefaultBucket,
                 AutoCloseStream = true,
                 Key = key,
-                FilePath = _option.SimpleUploadFilePath,
+                FilePath = _options.SimpleUploadFilePath,
                 CannedACL = S3CannedACL.Private,
             };
             //进度条
@@ -160,7 +158,7 @@ namespace AmazonKS3.Sample
             Console.WriteLine("---简单下载文件,Key:{0}---", key);
             var getObjectRequest = new GetObjectRequest()
             {
-                BucketName = _option.DefaultBucket,
+                BucketName = _options.DefaultBucket,
                 Key = key
             };
 
@@ -179,7 +177,7 @@ namespace AmazonKS3.Sample
 
             var url = GetClient().GetPreSignedURL(new GetPreSignedUrlRequest()
             {
-                BucketName = _option.DefaultBucket,
+                BucketName = _options.DefaultBucket,
                 Key = key,
                 Expires = DateTime.Now.AddMinutes(5),
             });
@@ -193,7 +191,7 @@ namespace AmazonKS3.Sample
         {
             Console.WriteLine("---生成预授权地址---");
 
-            var url = GetClient().GeneratePreSignedURL(_option.DefaultBucket, key, DateTime.Now.AddMinutes(10), null);
+            var url = GetClient().GeneratePreSignedURL(_options.DefaultBucket, key, DateTime.Now.AddMinutes(10), null);
             Console.WriteLine("生成预授权地址:{0}", url);
             return url;
         }
@@ -207,8 +205,8 @@ namespace AmazonKS3.Sample
             Console.WriteLine("---拷贝文件,目标:{0}---", destinationKey);
             var copyObjectResponse = await GetClient().CopyObjectAsync(new CopyObjectRequest()
             {
-                SourceBucket = _option.DefaultBucket,
-                DestinationBucket = _option.DefaultBucket,
+                SourceBucket = _options.DefaultBucket,
+                DestinationBucket = _options.DefaultBucket,
                 SourceKey = key,
                 DestinationKey = destinationKey
             });
@@ -227,7 +225,7 @@ namespace AmazonKS3.Sample
 
             var deleteObjectResponse = await GetClient().DeleteObjectAsync(new DeleteObjectRequest()
             {
-                BucketName = _option.DefaultBucket,
+                BucketName = _options.DefaultBucket,
                 Key = key
             });
 
@@ -245,7 +243,7 @@ namespace AmazonKS3.Sample
             //初始化分片上传
             var initiateMultipartUploadResponse = await GetClient().InitiateMultipartUploadAsync(new InitiateMultipartUploadRequest()
             {
-                BucketName = _option.DefaultBucket,
+                BucketName = _options.DefaultBucket,
                 Key = key,
             });
 
@@ -253,7 +251,7 @@ namespace AmazonKS3.Sample
             var uploadId = initiateMultipartUploadResponse.UploadId;
             // 计算分片总数。
             var partSize = 5 * 1024 * 1024;
-            var fi = new FileInfo(_option.MultipartUploadFilePath);
+            var fi = new FileInfo(_options.MultipartUploadFilePath);
             var fileSize = fi.Length;
             var partCount = fileSize / partSize;
             if (fileSize % partSize != 0)
@@ -265,7 +263,7 @@ namespace AmazonKS3.Sample
 
             var uploadPartTasks = new List<Task>();
 
-            using (var fs = File.Open(_option.MultipartUploadFilePath, FileMode.Open))
+            using (var fs = File.Open(_options.MultipartUploadFilePath, FileMode.Open))
             {
                 for (var i = 0; i < partCount; i++)
                 {
@@ -282,7 +280,7 @@ namespace AmazonKS3.Sample
                     {
                         return GetClient().UploadPartAsync(new UploadPartRequest()
                         {
-                            BucketName = _option.DefaultBucket,
+                            BucketName = _options.DefaultBucket,
                             UploadId = uploadId,
                             Key = key,
                             InputStream = new MemoryStream(buffer),
@@ -322,7 +320,7 @@ namespace AmazonKS3.Sample
 
             var listPartsResponse = await GetClient().ListPartsAsync(new ListPartsRequest()
             {
-                BucketName = _option.DefaultBucket,
+                BucketName = _options.DefaultBucket,
                 Key = key,
                 UploadId = uploadId
             });
@@ -334,7 +332,7 @@ namespace AmazonKS3.Sample
 
             var completeMultipartUploadResponse = await GetClient().CompleteMultipartUploadAsync(new CompleteMultipartUploadRequest()
             {
-                BucketName = _option.DefaultBucket,
+                BucketName = _options.DefaultBucket,
                 Key = key,
                 UploadId = uploadId,
                 PartETags = partETags

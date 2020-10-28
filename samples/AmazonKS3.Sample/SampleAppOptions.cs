@@ -1,6 +1,6 @@
 ﻿namespace AmazonKS3.Sample
 {
-    public class SampleAppOption
+    public class SampleAppOptions
     {
         /// <summary>AK
         /// </summary>
