@@ -123,6 +123,10 @@ namespace AmazonKS3
             if (RestUtil.IsCopyRequest(request))
             {
                 var copySource = request.GetHeaderValue(Headers.XAmzCopySource);
+                if (!copySource.StartsWith("/"))
+                {
+                    copySource = "/" + copySource;
+                }
                 request.Headers.Add(Headers.XKssCopySource, copySource);
             }
         }
