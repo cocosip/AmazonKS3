@@ -2,7 +2,7 @@
 
   <Import Project="..\..\build\common.props" />
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>AmazonKS3</AssemblyName>
     <PackageId>AmazonKS3</PackageId>
     <RootNamespace>AmazonKS3</RootNamespace>
