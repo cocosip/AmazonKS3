@@ -35,7 +35,7 @@ namespace AmazonKS3.Sample
                 .AddSingleton<SampleAppService>();
 
             var provider = services.BuildServiceProvider();
-            
+
             _sampleAppService = provider.GetService<SampleAppService>();
             Run();
             Console.ReadLine();
@@ -55,42 +55,37 @@ namespace AmazonKS3.Sample
             //// 获取Bucket权限
             //await _sampleAppService.GetAclAsync();
 
-            ////简单上传
-            //var simpleUploadKey = await _sampleAppService.SimpleUploadAsync();
+            //简单上传
+            var simpleUploadKey = await _sampleAppService.SimpleUploadAsync();
 
-            ////下载文件
-            //await _sampleAppService.SimpleGetObjectAsync(simpleUploadKey);
+            //下载文件
+            await _sampleAppService.SimpleGetObjectAsync(simpleUploadKey);
 
-            ////获取预授权地址
-            //var url1 = _sampleAppService.GetPreSignedURL(simpleUploadKey);
-            ////生成预授权地址
-            //var url2 = _sampleAppService.GeneratePreSignedURL(simpleUploadKey);
+            //获取预授权地址
+            var url1 = _sampleAppService.GetPreSignedURL(simpleUploadKey);
+            //生成预授权地址
+            var url2 = _sampleAppService.GeneratePreSignedURL(simpleUploadKey);
 
-            ////下载文件
-            //await _sampleAppService.SimpleGetObjectAsync(simpleUploadKey);
+            //下载文件
+            await _sampleAppService.SimpleGetObjectAsync(simpleUploadKey);
 
             //拷贝文件key
-            var copyKey = await _sampleAppService.CopyObjectAsync("000000/100001/100001001/20191203/5de6040ec3b3175954a29581.dcm");
-            //000000/100001/100001001/20191203/5de6040ec3b3175954a29581.dcm
-            //2c679ce5-2d28-4102-a1c1-fa7197c25258.dcm
-            //39/FILE0.dcm
-            //FILE0.dcm
-            //await _sampleAppService.SimpleGetObjectAsync(copyKey);
+            var copyKey = await _sampleAppService.CopyObjectAsync(simpleUploadKey);
 
-            ////删除文件
-            //await DeleteObject(simpleUploadKey);
-            //await DeleteObject(copyKey);
-            ////分片上传
-            //var multipartUploadKey = await MultipartUpload();
+            await _sampleAppService.SimpleGetObjectAsync(copyKey);
 
-            ////Url
-            //var multipartUrl = GeneratePreSignedURL(multipartUploadKey);
+            //删除文件
+            await _sampleAppService.DeleteObject(simpleUploadKey);
+            await _sampleAppService.DeleteObject(copyKey);
+            //分片上传
+            var multipartUploadKey = await _sampleAppService.MultipartUploadAsync();
 
-            ////获取文件信息
-            //await GetMetadata(multipartUploadKey);
+            //Url
+            var multipartUrl = _sampleAppService.GeneratePreSignedURL(multipartUploadKey);
 
-            ////获取ACL
-            //await GetACL(multipartUploadKey);
+            //获取文件信息
+            //await _sampleAppService.getme(multipartUploadKey);
+
 
         }
 

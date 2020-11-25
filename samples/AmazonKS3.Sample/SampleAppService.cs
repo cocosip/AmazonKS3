@@ -27,7 +27,7 @@ namespace AmazonKS3.Sample
                 {
                     ServiceURL = _options.ServerUrl,
                     ForcePathStyle = true,
-                    SignatureVersion = "v2"
+                    SignatureVersion = "2.0",
                 });
             }
             return _client;
