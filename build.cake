@@ -118,7 +118,7 @@ Task("Pack")
       {
          Configuration = parameters.Configuration,
          VersionSuffix = parameters.Version.Suffix,
-         IncludeSymbols = false,
+         IncludeSymbols = true,
          OutputDirectory = parameters.Paths.Directories.NugetRoot,
          MSBuildSettings = msBuildSettings
       };
