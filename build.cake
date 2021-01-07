@@ -82,12 +82,12 @@ Task("Build")
       var settings = new DotNetCoreBuildSettings
       {
          Configuration = parameters.Configuration,
-            VersionSuffix = parameters.Version.Suffix,
-            ArgumentCustomization = args =>
-            {
-               args.Append($"/p:InformationalVersion={parameters.Version.VersionWithSuffix()}");
-               return args;
-            }
+         VersionSuffix = parameters.Version.Suffix,
+         ArgumentCustomization = args =>
+         {
+            args.Append($"/p:InformationalVersion={parameters.Version.VersionWithSuffix()}");
+            return args;
+         }
       };
       foreach (var project in parameters.ProjectFiles)
       {
@@ -127,11 +127,6 @@ Task("Pack")
          DotNetCorePack(project.FullPath, settings);
          Information($"pack:{project.FullPath}");
       }
-      // foreach (var package in parameters.Packages.Nuget)
-      // {
-      //    //DotNetCorePack(project.PackagePath, settings);
-      //    Information($"publishpath:{package.PackagePath}");
-      // }
    });
 
 //发布Nuget
@@ -147,7 +142,6 @@ Task("Publish")
       //有标签,并且是Release才会发布
       if (parameters.ShouldPublish)
       {
-         Information($"publish,");
          // Resolve the API key.
          var apiKey = EnvironmentVariable("NUGET_API_KEY");
          if (string.IsNullOrEmpty(apiKey))
@@ -162,15 +156,32 @@ Task("Publish")
             throw new InvalidOperationException("Could not resolve NuGet API url.");
          }
 
+         var symbolsApiUrl = EnvironmentVariable("SYMBOLS_API_URL");
+         if (string.IsNullOrEmpty(symbolsApiUrl))
+         {
+            throw new InvalidOperationException("Could not resolve Symbols API url.");
+         }
+
          foreach (var package in parameters.Packages.Nuget)
          {
             // Push the package.
             NuGetPush(package.PackagePath, new NuGetPushSettings
             {
                ApiKey = apiKey,
-                  Source = apiUrl
+               Source = apiUrl
             });
             Information($"publish nuget:{package.PackagePath}");
+         }
+
+         foreach (var package in parameters.SymbolsPackages.Nuget)
+         {
+            // Push the package.
+            NuGetPush(package.PackagePath, new NuGetPushSettings
+            {
+               ApiKey = apiKey,
+               Source = symbolsApiUrl
+            });
+            Information($"symbol nuget:{package.PackagePath}");
          }
 
       }

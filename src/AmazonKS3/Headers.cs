@@ -6,20 +6,74 @@ namespace AmazonKS3
     /// </summary>
     public static class Headers
     {
+        /// <summary>
+        /// Cache-Control
+        /// </summary>
         public static string CACHE_CONTROL = "Cache-Control";
+
+        /// <summary>
+        /// Content-Disposition
+        /// </summary>
         public static string CONTENT_DISPOSITION = "Content-Disposition";
+
+        /// <summary>
+        /// Content-Encoding
+        /// </summary>
         public static string CONTENT_ENCODING = "Content-Encoding";
+
+        /// <summary>
+        /// Content-Length
+        /// </summary>
         public static string CONTENT_LENGTH = "Content-Length";
+
+        /// <summary>
+        /// Content-MD5
+        /// </summary>
         public static string CONTENT_MD5 = "Content-MD5";
+
+        /// <summary>
+        /// Content-Type
+        /// </summary>
         public static string CONTENT_TYPE = "Content-Type";
+
+        /// <summary>
+        /// Date
+        /// </summary>
         public static string DATE = "Date";
+
+        /// <summary>
+        /// ETag
+        /// </summary>
         public static string ETAG = "ETag";
+
+        /// <summary>
+        /// Last-Modified
+        /// </summary>
         public static string LAST_MODIFIED = "Last-Modified";
+
+        /// <summary>
+        /// Server
+        /// </summary>
         public static string SERVER = "Server";
+
+        /// <summary>
+        /// User-Agent
+        /// </summary>
         public static string USER_AGENT = "User-Agent";
+
+        /// <summary>
+        /// Host
+        /// </summary>
         public static string HOST = "Host";
+
+        /// <summary>
+        /// Connection
+        /// </summary>
         public static string CONNECTION = "Connection";
 
+        /// <summary>
+        /// Authorization
+        /// </summary>
         public static string AUTHORIZATION = "Authorization";
 
         /** Prefix for general KS3 headers: x-kss- */
@@ -75,15 +129,29 @@ namespace AmazonKS3
         /** Header for the copy object*/
         public static string XKssCopySource = "x-kss-copy-source";
 
-        //AWS copy头
+        /// <summary>
+        /// AWS copy头 x-amz-copy-source
+        /// </summary>
         public static string XAmzCopySource = "x-amz-copy-source";
 
-        /**callback */
+        /// <summary>
+        /// callback kss-async-process
+        /// </summary>
         public static string AsynchronousProcessingList = "kss-async-process";
+
+        /// <summary>
+        /// kss-notifyurl
+        /// </summary>
         public static string NotifyURL = "kss-notifyurl";
+
+        /// <summary>
+        /// TaskID
+        /// </summary>
         public static string TaskId = "TaskID";
 
-        //默认头部
+        /// <summary>
+        /// 默认头部 application/octet-stream
+        /// </summary>
         public static string DEFAULT_MIMETYPE = "application/octet-stream";
     }
 }

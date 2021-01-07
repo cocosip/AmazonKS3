@@ -10,6 +10,7 @@
     <RepositoryUrl>https://github.com/cocosip/AmazonKS3</RepositoryUrl>
     <Description>使用Amazon原生SDK调用金山云KS3</Description>
     <PackageTags>Amazon,AWSSDK,KS3,S3</PackageTags>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
 
     <!-- https://github.com/dotnet/sourcelink -->
     <IncludeSymbols>true</IncludeSymbols>

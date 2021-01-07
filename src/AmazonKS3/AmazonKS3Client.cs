@@ -7,15 +7,31 @@ namespace AmazonKS3
     /// </summary>
     public class AmazonKS3Client : AmazonS3Client
     {
+        /// <summary>
+        /// Ctor
+        /// </summary>
         public AmazonKS3Client()
         {
+
         }
 
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        /// <param name="awsAccessKeyId"></param>
+        /// <param name="awsSecretAccessKey"></param>
+        /// <param name="clientConfig"></param>
+        /// <returns></returns>
         public AmazonKS3Client(string awsAccessKeyId, string awsSecretAccessKey, AmazonKS3Config clientConfig) : base(awsAccessKeyId, awsSecretAccessKey, clientConfig)
         {
 
         }
 
+        /// <summary>
+        /// Ctor
+        /// </summary>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public AmazonKS3Client(AmazonKS3Config config) : base(config)
         {
 

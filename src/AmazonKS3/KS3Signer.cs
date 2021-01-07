@@ -10,8 +10,20 @@ using System.Text;
 
 namespace AmazonKS3
 {
+    /// <summary>
+    /// KS3 Signaer
+    /// </summary>
     public class KS3Signer : AWS3Signer
     {
+
+        /// <summary>
+        /// Sign method
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="clientConfig"></param>
+        /// <param name="metrics"></param>
+        /// <param name="awsAccessKeyId"></param>
+        /// <param name="awsSecretAccessKey"></param>
         public override void Sign(IRequest request, IClientConfig clientConfig, RequestMetrics metrics, string awsAccessKeyId, string awsSecretAccessKey)
         {
 
