@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AmazonKS3.Sample
@@ -46,14 +47,20 @@ namespace AmazonKS3.Sample
 
         public static async void Run()
         {
-            ////列出Bucket
-            //await _sampleAppService.ListBucketsAsync();
+            //列出Bucket
+            await _sampleAppService.ListBucketsAsync();
 
-            ////列出对象
-            //await _sampleAppService.ListObjectsAsync();
+            //列出对象
+            var objects = await _sampleAppService.ListObjectsAsync();
 
-            //// 获取Bucket权限
-            //await _sampleAppService.GetAclAsync();
+            //100001/100001001/20191203/5de60411c3b3175954a29588.dcm
+            if (objects.Any())
+            {
+                var url0 = _sampleAppService.GetPreSignedURL(objects.FirstOrDefault());
+            }
+
+            // 获取Bucket权限
+            await _sampleAppService.GetAclAsync();
 
             //简单上传
             var simpleUploadKey = await _sampleAppService.SimpleUploadAsync();

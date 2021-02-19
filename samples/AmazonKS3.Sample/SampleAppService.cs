@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AmazonKS3.Sample
@@ -87,7 +88,7 @@ namespace AmazonKS3.Sample
 
         /// <summary>列出对象
         /// </summary>
-        public async Task ListObjectsAsync(string prefix = "", string delimiter = "", int count = 10)
+        public async Task<List<string>> ListObjectsAsync(string prefix = "", string delimiter = "", int count = 10)
         {
             //查询文件
             Console.WriteLine("---列出Bucket前10个文件---");
@@ -104,6 +105,8 @@ namespace AmazonKS3.Sample
             {
                 Console.WriteLine("S3对象Key:{0}", s3Object.Key);
             }
+
+            return listObjectsResponse.S3Objects.Select(x => x.Key).ToList();
         }
 
 
