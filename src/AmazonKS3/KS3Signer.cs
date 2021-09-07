@@ -13,7 +13,7 @@ namespace AmazonKS3
     /// <summary>
     /// KS3 Signaer
     /// </summary>
-    public class KS3Signer : AWS3Signer
+    public class KS3Signer : AWS4Signer
     {
 
         /// <summary>
